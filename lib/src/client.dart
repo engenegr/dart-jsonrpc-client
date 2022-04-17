@@ -47,7 +47,7 @@ class Client {
     auth = 'Basic ' + base64Encode(utf8.encode('$user:$pass'));
   }
 
-  Future<Response> call(String method, String wallet = const "", {params = const []}) async {
+  Future<Response> call(String method, {params = const []}) async {
     Map<String, String> headers = {
       'Accept': 'application/json',
       'Authorization': auth
