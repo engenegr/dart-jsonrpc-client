@@ -39,7 +39,11 @@ class Client {
       this.pass,
       this.wallet,
       ) {
-    url = Uri.parse('$host:$port/wallet/$wallet');
+    if(wallet == "none") {
+      url = Uri.parse('$host:$port');
+    } else {
+      url = Uri.parse('$host:$port/wallet/$wallet');
+    }
     auth = 'Basic ' + base64Encode(utf8.encode('$user:$pass'));
   }
 
