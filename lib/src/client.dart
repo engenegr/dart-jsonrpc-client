@@ -9,6 +9,7 @@ class Client {
   String user = "";
   String pass = "";
   String auth = "";
+  String wallet = "";
   late Uri url;
 
   Client(
@@ -30,7 +31,19 @@ class Client {
     auth = 'Basic ' + base64Encode(utf8.encode('$user:$pass'));
   }
 
-  Future<Response> call(String method, {params = const []}) async {
+  Client.withWallet(
+      this.host,
+      this.port,
+      this.version,
+      this.user,
+      this.pass,
+      this.wallet,
+      ) {
+    url = Uri.parse('$host:$port/wallet/$wallet');
+    auth = 'Basic ' + base64Encode(utf8.encode('$user:$pass'));
+  }
+
+  Future<Response> call(String method, String wallet = const "", {params = const []}) async {
     Map<String, String> headers = {
       'Accept': 'application/json',
       'Authorization': auth
